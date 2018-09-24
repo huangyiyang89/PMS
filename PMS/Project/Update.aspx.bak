@@ -1,0 +1,97 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Update.aspx.cs" Inherits="PMS.Project.Update" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.1, Version=18.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+    <div class="titlebox">
+        <h1>项目信息</h1>   
+    </div>
+    <div class="box">
+        <h2>基本信息</h2>
+        <div class="m-t">
+            <dx:ASPxTextBox ID="ASPxTextBoxId" runat="server" Width="170px" Caption="项目编号" ClientEnabled="false"></dx:ASPxTextBox>
+        </div>
+        <div class="m-t">
+            <dx:ASPxTextBox ID="ASPxTextBoxName" runat="server" Width="170px" Caption="项目名称"></dx:ASPxTextBox>
+        </div>
+   </div>
+        <div class="box">
+              <h2>楼栋信息</h2>
+            <dx:ASPxGridView ID="ASPxGridView1" runat="server" DataSourceID="EntityDataSource1" Width="700px" KeyFieldName="Id" OnDataBinding="ASPxGridView1_DataBinding" AutoGenerateColumns="False" OnInitNewRow="ASPxGridView1_InitNewRow" CssClass="m-t">
+                <SettingsEditing Mode="EditFormAndDisplayRow"></SettingsEditing>
+                <SettingsBehavior ConfirmDelete="True"></SettingsBehavior>
+
+                <EditFormLayoutProperties ColCount="2" ColumnCount="2">
+                    <Items>
+                        <dx:GridViewColumnLayoutItem ColumnName="Name" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:GridViewColumnLayoutItem ColumnName="DoorsEachFloor" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:GridViewColumnLayoutItem ColumnName="BottomFloor" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:GridViewColumnLayoutItem ColumnName="TopFloor" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:GridViewColumnLayoutItem ColumnName="ProjectId" ColSpan="1" ClientVisible="false"></dx:GridViewColumnLayoutItem>
+                        <dx:EditModeCommandLayoutItem ColSpan="2" ColumnSpan="2" HorizontalAlign="Right"></dx:EditModeCommandLayoutItem>
+                    </Items>
+                </EditFormLayoutProperties>
+                <Columns>
+                    <dx:GridViewCommandColumn VisibleIndex="0" ShowNewButtonInHeader="True" ShowDeleteButton="True" ShowEditButton="True" Width="100px"></dx:GridViewCommandColumn>
+                    <dx:GridViewDataTextColumn VisibleIndex="2" FieldName="Name" Caption="楼栋号"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataSpinEditColumn FieldName="BottomFloor" VisibleIndex="3" Caption="最低层数">
+                        <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
+                    </dx:GridViewDataSpinEditColumn>
+                    <dx:GridViewDataSpinEditColumn FieldName="TopFloor" VisibleIndex="4" Caption="最高层数">
+                        <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
+                    </dx:GridViewDataSpinEditColumn>
+                    <dx:GridViewDataSpinEditColumn FieldName="DoorsEachFloor" VisibleIndex="5" Caption="每层几户">
+                        <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
+                    </dx:GridViewDataSpinEditColumn>
+
+
+                    <dx:GridViewDataTextColumn FieldName="ProjectId" VisibleIndex="6" Visible="false"></dx:GridViewDataTextColumn>
+                </Columns>
+            </dx:ASPxGridView>
+        </div>
+       
+       
+
+
+
+        <div class="box">
+            <h2>施工进度</h2>
+            <dx:ASPxGridView ID="ASPxGridView2" runat="server" DataSourceID="EntityDataSource2" AutoGenerateColumns="False" Width="700px" KeyFieldName="Id" OnDataBinding="ASPxGridView2_DataBinding" CssClass="m-t">
+                <EditFormLayoutProperties ColCount="2" ColumnCount="2">
+                    <Items>
+                        <dx:GridViewColumnLayoutItem ColumnName="BuildingId" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:GridViewColumnLayoutItem ColumnName="Progress" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:GridViewColumnLayoutItem ColumnName="FromFloor" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:GridViewColumnLayoutItem ColumnName="ToFloor" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                        <dx:EditModeCommandLayoutItem ColSpan="2" ColumnSpan="2" HorizontalAlign="Right"></dx:EditModeCommandLayoutItem>
+                    </Items>
+                </EditFormLayoutProperties>
+                <Columns>
+                    <dx:GridViewCommandColumn ShowEditButton="True" VisibleIndex="0" ShowNewButtonInHeader="True" Width="100px" ShowDeleteButton="True"></dx:GridViewCommandColumn>
+                    <dx:GridViewDataTextColumn VisibleIndex="3" FieldName="FromFloor" Caption="开始层数"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn VisibleIndex="4" FieldName="ToFloor" Caption="结束层数"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataComboBoxColumn FieldName="BuildingId" VisibleIndex="1" Caption="楼栋号">
+                        <PropertiesComboBox DataSourceID="EntityDataSource1" TextField="Name" ValueField="Id"></PropertiesComboBox>
+                    </dx:GridViewDataComboBoxColumn>
+                    <dx:GridViewDataComboBoxColumn FieldName="Progress" VisibleIndex="2" PropertiesComboBox-DataSourceID="EntityDataSource3" Caption="施工进度">
+                        <PropertiesComboBox TextField="Name" ValueField="Name"></PropertiesComboBox>
+                    </dx:GridViewDataComboBoxColumn>
+
+                </Columns>
+            </dx:ASPxGridView>
+        </div>
+
+   
+
+    <ef:EntityDataSource ID="EntityDataSource1" runat="server" EntitySetName="Buildings" ContextTypeName="PMS.Models.Db" EnableInsert="true" EnableDelete="true" EnableUpdate="true" Where="it.ProjectId=@ProjectId">
+        <WhereParameters>
+            <asp:QueryStringParameter Name="ProjectId" QueryStringField="Id" Type="Int32" />
+        </WhereParameters>
+    </ef:EntityDataSource>
+    <ef:EntityDataSource ID="EntityDataSource2" runat="server" EntitySetName="BuildingProgresses" ContextTypeName="PMS.Models.Db" EnableInsert="true" EnableDelete="true" EnableUpdate="true" Include="Building" Where="it.Building.ProjectId = @ProjectId" OrderBy="it.BuildingId">
+        <WhereParameters>
+            <asp:QueryStringParameter Name="ProjectId" QueryStringField="Id" Type="Int32" />
+        </WhereParameters>
+    </ef:EntityDataSource>
+    <ef:EntityDataSource ID="EntityDataSource3" runat="server" EntitySetName="ProgressLists" ContextTypeName="PMS.Models.Db"></ef:EntityDataSource>
+
+</asp:Content>

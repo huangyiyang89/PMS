@@ -1,0 +1,41 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="PMS.Project.List" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.1, Version=18.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+     <div class="titlebox">
+        <h1>项目</h1>   
+    </div>
+
+    <div class="box">
+          <h2>项目列表</h2>
+    <dx:ASPxGridView ID="ASPxGridView1" runat="server" DataSourceID="EntityDataSource1" AutoGenerateColumns="False" Width="700px" KeyFieldName="Id" SettingsBehavior-ConfirmDelete="true" OnDataBinding="ASPxGridView1_DataBinding">
+
+        <SettingsEditing Mode="EditFormAndDisplayRow"></SettingsEditing>
+
+        <SettingsPopup>
+            <EditForm VerticalAlign="WindowCenter" HorizontalAlign="WindowCenter"></EditForm>
+        </SettingsPopup>
+
+        <SettingsSearchPanel Visible="True" CustomEditorID="tbToolbarSearch"></SettingsSearchPanel>
+
+        <EditFormLayoutProperties ColCount="2" ColumnCount="2">
+            <Items>
+                <dx:GridViewColumnLayoutItem ColumnName="Name" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                <dx:EditModeCommandLayoutItem ColSpan="1" HorizontalAlign="Right"></dx:EditModeCommandLayoutItem>
+            </Items>
+        </EditFormLayoutProperties>
+        <Columns>
+            <dx:GridViewCommandColumn ShowEditButton="True" VisibleIndex="0" ShowDeleteButton="True" Caption="" Width="100px" HeaderStyle-HorizontalAlign="Center" ShowNewButtonInHeader="True"></dx:GridViewCommandColumn>
+            <dx:GridViewDataTextColumn Caption="项目编号" FieldName="Id" VisibleIndex="1" Width="50px" CellStyle-HorizontalAlign="Center"></dx:GridViewDataTextColumn>
+            <dx:GridViewDataTextColumn Caption="项目名称" FieldName="Name" VisibleIndex="2"></dx:GridViewDataTextColumn>
+            <dx:GridViewDataHyperLinkColumn FieldName="Id" VisibleIndex="3" Caption="更新项目信息" Width="100px" HeaderStyle-HorizontalAlign="Center" CellStyle-HorizontalAlign="Center">
+                <PropertiesHyperLinkEdit Text="更新项目信息" NavigateUrlFormatString="Update.aspx?Id={0}"></PropertiesHyperLinkEdit>
+            </dx:GridViewDataHyperLinkColumn>
+        </Columns>
+        
+        <SettingsSearchPanel CustomEditorID="tbToolbarSearch" />
+    </dx:ASPxGridView>
+    </div>
+  
+    <ef:EntityDataSource ID="EntityDataSource1" runat="server" EntitySetName="Projects" ContextTypeName="PMS.Models.Db" EnableInsert="true" EnableDelete="true" EnableUpdate="true"></ef:EntityDataSource>
+</asp:Content>

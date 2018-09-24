@@ -1,0 +1,28 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Progress.aspx.cs" Inherits="PMS.Config.Progress" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+    <div class="titlebox">
+        <h1>阶段设置</h1>
+    </div>
+
+    <div class="box">
+        <h2>阶段名称列表</h2>
+        <dx:ASPxGridView ID="ASPxGridView1" runat="server" KeyFieldName="Id" DataSourceID="EntityDataSource1" Width="700px" AutoGenerateColumns="False">
+            <EditFormLayoutProperties ColCount="2" ColumnCount="2">
+                <Items>
+                    <dx:GridViewColumnLayoutItem ColumnName="Name" ColSpan="1"></dx:GridViewColumnLayoutItem>
+                    <dx:EditModeCommandLayoutItem ColSpan="2" ColumnSpan="2" HorizontalAlign="Right"></dx:EditModeCommandLayoutItem>
+                </Items>
+            </EditFormLayoutProperties>
+            <Columns>
+                <dx:GridViewCommandColumn ShowEditButton="True" VisibleIndex="0" ShowNewButtonInHeader="True" ShowDeleteButton="True" Width="100px"></dx:GridViewCommandColumn>
+                <dx:GridViewDataTextColumn FieldName="Id" VisibleIndex="1" Width="50px" Caption="编号" CellStyle-HorizontalAlign="Center"></dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="2" Caption="阶段名称"></dx:GridViewDataTextColumn>
+            </Columns>
+        </dx:ASPxGridView>
+    </div>
+
+    <ef:EntityDataSource ID="EntityDataSource1" runat="server" EntitySetName="ProgressLists" ContextTypeName="PMS.Models.Db" EnableInsert="true" EnableDelete="true" EnableUpdate="true"></ef:EntityDataSource>
+</asp:Content>

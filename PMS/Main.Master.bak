@@ -1,0 +1,66 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="PMS.Main" %>
+
+<%@ Register Assembly="DevExpress.Web.v18.1, Version=18.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>PMS</title>
+    <link href="Content/Style.css" rel="stylesheet" />
+</head>
+<body style="background-color:#f0f2f5;margin:0px">
+    <form id="form1" runat="server">
+        
+        <dx:ASPxPanel ID="ASPxPanel1" runat="server" Height="60px" FixedPosition="WindowTop" Border-BorderStyle="None" CssClass="shadow">
+            <PanelCollection>
+                <dx:PanelContent>
+                    <div class="logo">
+                        PMS
+                    </div>
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxPanel>
+        <dx:ASPxPanel ID="ASPxPanel2" runat="server" Width="200px" FixedPosition="WindowLeft" Border-BorderStyle="None">
+            <PanelCollection>
+                <dx:PanelContent>
+                    <dx:ASPxNavBar ID="ASPxNavBar1" runat="server" Width="100%">
+                        <Groups>
+                            <dx:NavBarGroup Text="项目">
+                                <Items>
+                                    <dx:NavBarItem  Text="项目列表" NavigateUrl="Project/List.aspx"></dx:NavBarItem>
+                                </Items>
+                            </dx:NavBarGroup>
+                            <dx:NavBarGroup Text="随机抽取">
+                                <Items>
+                                    <dx:NavBarItem Text="完全随机" NavigateUrl="Draw/ALL.aspx"></dx:NavBarItem>
+                                    <dx:NavBarItem Text="楼栋均匀" NavigateUrl="Draw/Building.aspx"></dx:NavBarItem>
+                                    <dx:NavBarItem Text="阶段均匀" NavigateUrl="Draw/Progress.aspx"></dx:NavBarItem>
+                                </Items>
+                            </dx:NavBarGroup>
+                            <dx:NavBarGroup Text="评估">
+                            </dx:NavBarGroup>
+                            <dx:NavBarGroup Text="设置">
+                                <Items>
+                                    <dx:NavBarItem Text="阶段设置" NavigateUrl="Config/Progress.aspx"></dx:NavBarItem>
+                                </Items>
+                            </dx:NavBarGroup>
+                        </Groups>
+                    </dx:ASPxNavBar>
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxPanel>
+        <dx:ASPxPanel ID="ASPxPanel3" runat="server" Width="100%" Border-BorderStyle="None" Paddings-Padding="0px">
+            <PanelCollection>
+                <dx:PanelContent>
+                    <asp:ContentPlaceHolder runat="server" ID="ContentPlaceHolder">
+                    </asp:ContentPlaceHolder>
+                </dx:PanelContent>
+            </PanelCollection>
+
+        </dx:ASPxPanel>
+
+    </form>
+</body>
+</html>

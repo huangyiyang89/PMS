@@ -1,0 +1,56 @@
+﻿
+.m-t {
+    margin-top: 14px;
+}
+
+.m-b {
+    margin-bottom: 14px;
+}
+
+.m-l {
+    margin-left: 14px;
+}
+
+.m-r {
+    margin-right: 14px;
+}
+
+.grid {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.shadow {
+    -webkit-box-shadow: 0 2px 8px #f0f1f2;
+    box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.logo {
+    width: 200px;
+    float: left;
+    text-align: center;
+    line-height: 60px;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.box {
+    background-color: white;
+    margin: 24px 24px 0;
+    padding: 24px 32px;
+}
+
+    .box h2 {
+        margin-top: 0px;
+        margin-bottom: 24px;
+    }
+
+.titlebox {
+    background-color: white;
+    padding: 24px 32px;
+}
+
+    .titlebox h1 {
+        margin-top: 0px;
+        margin-bottom: 16px;
+    }
